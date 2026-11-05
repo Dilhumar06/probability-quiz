@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probability Quiz | Test Your Probability Skills</title>
+  <style>
+    /* -------------------------------------------------------------
+       THEME & DESIGN SYSTEM (Dark Navy, Light Blue, Crisp White)
+    -------------------------------------------------------------- */
+    :root {
+      --bg-dark: #090e17;
+      --surface-1: #0f172a;
+      --surface-2: #1e293b;
+      --surface-3: #334155;
+      --accent-blue: #38bdf8;
+      --accent-blue-hover: #0ea5e9;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --success-bg: rgba(16, 185, 129, 0.12);
+      --success-border: #059669;
+      --danger: #ef4444;
+      --danger-bg: rgba(239, 68, 68, 0.12);
+      --danger-border: #dc2626;
+      --easy-badge: #10b981;
+      --medium-badge: #f59e0b;
+      --hard-badge: #ec4899;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+      --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 20% 15%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+        radial-gradient(at 80% 85%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      padding: 20px 24px;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--accent-blue), #1d4ed8);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .brand span {
+      color: var(--accent-blue);
+    }
+
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* -------------------------------------------------------------
+       CARDS & SHARED LAYOUT
+    -------------------------------------------------------------- */
+    .card {
+      background: var(--surface-1);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 14px 28px;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #031525;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent-blue);
+      border: 2px solid var(--accent-blue);
+    }
+
+    .btn-outline:hover {
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    /* -------------------------------------------------------------
+       HOME VIEW
+    -------------------------------------------------------------- */
+    .home-hero {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--accent-blue);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .home-title {
+      font-size: clamp(2rem, 5vw, 2.85rem);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .home-title span {
+      background: linear-gradient(135deg, #fff 30%, var(--accent-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .home-subtitle {
+      font-size: 1.2rem;
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .home-desc {
+      color: var(--text-muted);
+      max-width: 600px;
+      font-size: 1.05rem;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      width: 100%;
+      margin: 16px 0 10px;
+    }
+
+    .stat-pill {
+      background: var(--surface-2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stat-text strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--text-main);
+    }
+
+    .stat-text span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* -------------------------------------------------------------
+       QUIZ VIEW
+    -------------------------------------------------------------- */
+    .quiz-header {
+      margin-bottom: 24px;
+    }
+
+    .quiz-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .question-count {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .difficulty-tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .difficulty-tag.easy {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--easy-badge);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .difficulty-tag.medium {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--medium-badge);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .difficulty-tag.hard {
+      background: rgba(236, 72, 153, 0.15);
+      color: var(--hard-badge);
+      border: 1px solid rgba(236, 72, 153, 0.3);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: var(--surface-2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #0284c7, var(--accent-blue));
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: 999px;
+    }
+
+    .math-illustration {
+      background: var(--surface-2);
+      border: 1px dashed rgba(56, 189, 248, 0.3);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .illustration-icon {
+      font-size: 2.2rem;
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .illustration-caption {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .question-prompt {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .options-grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface-2);
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.15s ease;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.05);
+      transform: translateX(4px);
+    }
+
+    .option-btn.selected {
+      border-color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.15);
+      box-shadow: 0 0 0 1px var(--accent-blue);
+    }
+
+    .option-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--surface-3);
+      color: var(--text-main);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.9rem;
+      transition: background 0.15s ease;
+    }
+
+    .option-btn.selected .option-badge {
+      background: var(--accent-blue);
+      color: #031525;
+    }
+
+    /* Option states after check */
+    .option-btn.is-correct {
+      background: var(--success-bg) !important;
+      border-color: var(--success) !important;
+      color: #ecfdf5 !important;
+    }
+    .option-btn.is-correct .option-badge {
+      background: var(--success) !important;
+      color: white !important;
+    }
+
+    .option-btn.is-incorrect {
+      background: var(--danger-bg) !important;
+      border-color: var(--danger) !important;
+      color: #fef2f2 !important;
+    }
+    .option-btn.is-incorrect .option-badge {
+      background: var(--danger) !important;
+      color: white !important;
+    }
+
+    .option-btn:disabled {
+      cursor: default;
+      transform: none !important;
+    }
+
+    /* Feedback Card */
+    .feedback-box {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: var(--radius-md);
+      animation: slideIn 0.3s ease forwards;
+    }
+
+    .feedback-box.correct {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+    }
+
+    .feedback-box.incorrect {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+    }
+
+    .feedback-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .feedback-box.correct .feedback-title {
+      color: var(--success);
+    }
+
+    .feedback-box.incorrect .feedback-title {
+      color: var(--danger);
+    }
+
+    .feedback-explanation {
+      color: var(--text-main);
+      font-size: 0.95rem;
+      margin-bottom: 18px;
+      padding-top: 6px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+
+    .feedback-explanation strong {
+      color: var(--accent-blue);
+    }
+
+    .feedback-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* -------------------------------------------------------------
+       RESULTS VIEW
+    -------------------------------------------------------------- */
+    .results-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .score-circle {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      border: 6px solid var(--accent-blue);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+      box-shadow: 0 0 35px var(--accent-glow);
+    }
+
+    .score-number {
+      font-size: 3.2rem;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--text-main);
+    }
+
+    .score-percentage {
+      font-size: 1.1rem;
+      color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .results-badge {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-blue);
+    }
+
+    .results-message {
+      color: var(--text-muted);
+      max-width: 560px;
+      font-size: 1.05rem;
+    }
+
+    .results-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    /* Review section */
+    .review-section {
+      width: 100%;
+      margin-top: 40px;
+      text-align: left;
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .review-item {
+      background: var(--surface-2);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 16px;
+      border-left: 5px solid transparent;
+    }
+
+    .review-item.was-correct {
+      border-left-color: var(--success);
+    }
+
+    .review-item.was-incorrect {
+      border-left-color: var(--danger);
+    }
+
+    .review-q-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .review-answer-row {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+
+    .review-answer-row strong {
+      color: var(--text-muted);
+    }
+
+    .review-answer-row span.correct-txt {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .review-answer-row span.incorrect-txt {
+      color: var(--danger);
+      font-weight: 600;
+    }
+
+    .review-expl {
+      margin-top: 10px;
+      padding-top: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+    }
+
+    /* -------------------------------------------------------------
+       ANIMATIONS & HELPERS
+    -------------------------------------------------------------- */
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 24px 18px;
+      }
+      .home-title {
+        font-size: 2rem;
+      }
+      .option-btn {
+        padding: 12px 14px;
+        font-size: 0.95rem;
+      }
+      .results-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+      .results-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand" onclick="location.reload(); return false;">
+        <div class="brand-icon">
+          <!-- Probability Dice SVG -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="4" />
+            <circle cx="8" cy="8" r="1.5" fill="currentColor" />
+            <circle cx="16" cy="16" r="1.5" fill="currentColor" />
+            <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+            <circle cx="8" cy="16" r="1.5" fill="currentColor" />
+            <circle cx="16" cy="8" r="1.5" fill="currentColor" />
+          </svg>
+        </div>
+        Probability<span>Quiz</span>
+      </a>
+      <span style="font-size: 0.85rem; color: var(--text-muted);">Math Interactive Lab</span>
+    </div>
+  </header>
+
+  <!-- Main Views Container -->
+  <main>
+
+    <!-- 1. HOME VIEW -->
+    <section id="home-view" class="card">
+      <div class="home-hero">
+        <div class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Interactive Learning
+        </div>
+
+        <h1 class="home-title">Probability Quiz</h1>
+        <h2 class="home-subtitle">Test Your Probability Skills!</h2>
+
+        <p class="home-desc">
+          Challenge your understanding of sample spaces, independent events, combinations, and conditional probability with clear step-by-step explanations for every question.
+        </p>
+
+        <!-- Stats overview -->
+        <div class="stats-row">
+          <div class="stat-pill">
+            <div class="stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="stat-text">
+              <strong>10 Questions</strong>
+              <span>Carefully curated</span>
+            </div>
+          </div>
+
+          <div class="stat-pill">
+            <div class="stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="stat-text">
+              <strong>3 Difficulties</strong>
+              <span>Easy, Medium & Hard</span>
+            </div>
+          </div>
+
+          <div class="stat-pill">
+            <div class="stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="stat-text">
+              <strong>Instant Feedback</strong>
+              <span>Formulas & Solutions</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="start-btn" class="btn btn-primary" style="font-size: 1.15rem; padding: 16px 40px; margin-top: 12px;">
+          Start Quiz
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. QUIZ VIEW -->
+    <section id="quiz-view" class="card hidden">
+      <div class="quiz-header">
+        <div class="quiz-meta">
+          <span class="question-count" id="question-tracker">Question 1 of 10</span>
+          <span class="difficulty-tag" id="difficulty-badge">Easy</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Mathematical illustration card -->
+      <div class="math-illustration" id="math-illustration">
+        <div class="illustration-icon" id="illustration-icon">🪙</div>
+        <div>
+          <div style="font-weight: 600; font-size: 0.95rem; color: var(--accent-blue);" id="illustration-title">Coin Toss Probability</div>
+          <div class="illustration-caption" id="illustration-desc">Visualizing independent binary sample spaces.</div>
+        </div>
+      </div>
+
+      <!-- Question Text -->
+      <h2 class="question-prompt" id="question-text">Question prompt goes here</h2>
+
+      <!-- 4 Multiple Choice Options -->
+      <div class="options-grid" id="options-grid"></div>
+
+      <!-- Action Button -->
+      <div id="check-action-bar">
+        <button id="check-btn" class="btn btn-primary" style="width: 100%;" disabled>
+          Check Answer
+        </button>
+      </div>
+
+      <!-- Feedback Area -->
+      <div id="feedback-box" class="feedback-box hidden">
+        <div class="feedback-title" id="feedback-title"></div>
+        <div class="feedback-explanation" id="feedback-explanation"></div>
+        <div class="feedback-actions">
+          <button id="next-btn" class="btn btn-primary">
+            Next Question
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. RESULTS VIEW -->
+    <section id="results-view" class="card hidden">
+      <div class="results-container">
+        <div class="hero-badge">Quiz Completed</div>
+
+        <div class="score-circle">
+          <span class="score-number" id="final-score">8</span>
+          <span class="score-percentage" id="final-percentage">80%</span>
+        </div>
+
+        <h2 class="results-badge" id="results-headline">Outstanding Job!</h2>
+        <p class="results-message" id="results-message">You have a firm command over probability fundamentals.</p>
+
+        <div class="results-actions">
+          <button id="try-again-btn" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Try Again
+          </button>
+          <button id="toggle-review-btn" class="btn btn-outline">
+            Review Answers
+          </button>
+        </div>
+
+        <!-- Collapsible Review section -->
+        <div id="review-section" class="review-section hidden">
+          <div class="review-header">
+            <h3 style="font-size: 1.2rem;">Detailed Question Review</h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">10 Questions</span>
+          </div>
+          <div id="review-list"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Probability Quiz &bull; An interactive mathematics learning module &bull; No login required
+  </footer>
+
+  <!-- -------------------------------------------------------------
+       JAVASCRIPT LOGIC & CURATED QUESTION DATA STRUCTURE
+  -------------------------------------------------------------- -->
+  <script>
+    /**
+     * QUIZ QUESTIONS DATASET
+     * Exactly 10 real probability problems across 3 difficulty levels.
+     * Easy to edit, extend, or maintain.
+     */
+    const quizData = [
+      {
+        id: 1,
+        difficulty: "Easy",
+        icon: "🪙",
+        iconTitle: "Coin Flipping",
+        iconDesc: "Independent events with two equally likely outcomes: P(H) = P(T) = 0.5",
+        question: "A fair coin is tossed two times. What is the probability of getting Heads on both tosses?",
+        options: ["1/2", "1/4", "1/8", "3/4"],
+        correctIndex: 1, // "1/4"
+        explanation: "Each toss is independent with P(Heads) = 1/2. By the multiplication rule for independent events: P(H and H) = 1/2 × 1/2 = 1/4 (or 25%)."
+      },
+      {
+        id: 2,
+        difficulty: "Easy",
+        icon: "🎲",
+        iconTitle: "Standard 6-Sided Die",
+        iconDesc: "Sample Space S = {1, 2, 3, 4, 5, 6}, each with probability 1/6",
+        question: "A fair six-sided die is rolled once. What is the probability of rolling a number greater than 4?",
+        options: ["1/6", "1/3", "1/2", "2/3"],
+        correctIndex: 1, // "1/3"
+        explanation: "The outcomes greater than 4 are {5, 6}, which gives 2 favorable outcomes. Total possible outcomes = 6. Thus, P(> 4) = 2/6 = 1/3."
+      },
+      {
+        id: 3,
+        difficulty: "Easy",
+        icon: "🔮",
+        iconTitle: "Single Draw Sampling",
+        iconDesc: "Favorable outcomes divided by the total size of the sample space",
+        question: "A bag contains 4 red marbles, 6 blue marbles, and 5 green marbles. If one marble is drawn at random, what is the probability that it is blue?",
+        options: ["2/5", "4/15", "1/3", "1/2"],
+        correctIndex: 0, // "2/5"
+        explanation: "Total marbles = 4 + 6 + 5 = 15. The number of blue marbles is 6. Therefore, P(Blue) = 6/15, which simplifies by dividing numerator and denominator by 3 to 2/5 (40%)."
+      },
+      {
+        id: 4,
+        difficulty: "Medium",
+        icon: "🃏",
+        iconTitle: "Standard 52-Card Deck",
+        iconDesc: "Mutually exclusive categories within a partitioned 52-element set",
+        question: "What is the probability of drawing either a King or a Queen from a standard, shuffled deck of 52 playing cards?",
+        options: ["1/13", "2/13", "4/13", "1/26"],
+        correctIndex: 1, // "2/13"
+        explanation: "There are 4 Kings and 4 Queens in a deck of 52 cards (total 8 favorable cards). Since an individual card cannot be both a King and a Queen, they are mutually exclusive: P(King or Queen) = (4 + 4) / 52 = 8/52 = 2/13."
+      },
+      {
+        id: 5,
+        difficulty: "Medium",
+        icon: "🎲",
+        iconTitle: "Sum of Two Dice",
+        iconDesc: "Cartesian product of two dice rolls: 6 × 6 = 36 total outcomes",
+        question: "Two standard fair dice are rolled at the same time. What is the probability that the sum of the two dice is exactly 7?",
+        options: ["1/12", "5/36", "1/6", "7/36"],
+        correctIndex: 2, // "1/6"
+        explanation: "Total pairs = 6 × 6 = 36. Pairs that sum to 7 are: (1,6), (2,5), (3,4), (4,3), (5,2), and (6,1) — exactly 6 combinations. P(Sum = 7) = 6/36 = 1/6."
+      },
+      {
+        id: 6,
+        difficulty: "Medium",
+        icon: "∪",
+        iconTitle: "Addition Rule of Probability",
+        iconDesc: "P(A ∪ B) = P(A) + P(B) - P(A ∩ B)",
+        question: "Two independent events A and B have probabilities P(A) = 0.4 and P(B) = 0.5. What is the probability that at least one event occurs: P(A ∪ B)?",
+        options: ["0.90", "0.20", "0.70", "0.60"],
+        correctIndex: 2, // "0.70"
+        explanation: "Since A and B are independent, P(A ∩ B) = P(A) × P(B) = 0.4 × 0.5 = 0.20. By the addition rule: P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = 0.4 + 0.5 - 0.20 = 0.70."
+      },
+      {
+        id: 7,
+        difficulty: "Medium",
+        icon: "✏️",
+        iconTitle: "Sampling Without Replacement",
+        iconDesc: "The sample space shrinks by 1 after each successive pick",
+        question: "A pencil box contains 3 red pencils and 2 blue pencils. If two pencils are drawn one after another without replacement, what is the probability that both are red?",
+        options: ["9/25", "3/10", "6/25", "1/2"],
+        correctIndex: 1, // "3/10"
+        explanation: "For the 1st draw, P(Red) = 3/5. With 1 red removed, 4 pencils remain (2 red, 2 blue). For the 2nd draw, P(Red | 1st Red) = 2/4 = 1/2. Combined probability = (3/5) × (1/2) = 3/10 (or 30%)."
+      },
+      {
+        id: 8,
+        difficulty: "Hard",
+        icon: "📊",
+        iconTitle: "Conditional Probability",
+        iconDesc: "Bayes & Conditioning: P(B | A) = P(A ∩ B) / P(A)",
+        question: "In a class, 60% of students study Math, 40% study Physics, and 20% study both. Given that a student studies Math, what is the probability that they also study Physics?",
+        options: ["1/3", "1/2", "2/5", "3/5"],
+        correctIndex: 0, // "1/3"
+        explanation: "Using the conditional probability formula P(Physics | Math) = P(Math ∩ Physics) / P(Math) = 0.20 / 0.60 = 2/6 = 1/3 (approx 33.3%)."
+      },
+      {
+        id: 9,
+        difficulty: "Hard",
+        icon: "🎯",
+        iconTitle: "Complement Rule",
+        iconDesc: "Calculating 'At least one' via P(At least 1) = 1 - P(None)",
+        question: "Three fair coins are tossed simultaneously. What is the probability of getting at least one Tail?",
+        options: ["1/8", "3/8", "7/8", "3/4"],
+        correctIndex: 2, // "7/8"
+        explanation: "Use the complement rule: P(at least one Tail) = 1 - P(no Tails). 'No Tails' means all three coins are Heads. P(All Heads) = (1/2)³ = 1/8. Thus, 1 - 1/8 = 7/8."
+      },
+      {
+        id: 10,
+        difficulty: "Hard",
+        icon: "🧮",
+        iconTitle: "Binomial Distribution",
+        iconDesc: "P(X = k) = C(n, k) × p^k × (1-p)^(n-k)",
+        question: "A fair coin is tossed 4 times. What is the probability of obtaining exactly 2 Heads?",
+        options: ["1/4", "3/8", "1/2", "5/16"],
+        correctIndex: 1, // "3/8"
+        explanation: "The number of ways to pick 2 heads out of 4 flips is C(4, 2) = 6. Total outcomes for 4 flips = 2⁴ = 16. Therefore, the probability is 6/16 = 3/8 (or 37.5%)."
+      }
+    ];
+
+    // Quiz State
+    let currentQuestionIndex = 0;
+    let selectedOptionIndex = null;
+    let score = 0;
+    let userAnswers = []; // Store records: { questionId, selectedIndex, isCorrect }
+
+    // DOM Elements
+    const homeView = document.getElementById("home-view");
+    const quizView = document.getElementById("quiz-view");
+    const resultsView = document.getElementById("results-view");
+
+    const startBtn = document.getElementById("start-btn");
+    const checkBtn = document.getElementById("check-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const tryAgainBtn = document.getElementById("try-again-btn");
+    const toggleReviewBtn = document.getElementById("toggle-review-btn");
+
+    const questionTracker = document.getElementById("question-tracker");
+    const difficultyBadge = document.getElementById("difficulty-badge");
+    const progressBar = document.getElementById("progress-bar");
+    const illustrationIcon = document.getElementById("illustration-icon");
+    const illustrationTitle = document.getElementById("illustration-title");
+    const illustrationDesc = document.getElementById("illustration-desc");
+    const questionText = document.getElementById("question-text");
+    const optionsGrid = document.getElementById("options-grid");
+
+    const feedbackBox = document.getElementById("feedback-box");
+    const feedbackTitle = document.getElementById("feedback-title");
+    const feedbackExplanation = document.getElementById("feedback-explanation");
+
+    const finalScore = document.getElementById("final-score");
+    const finalPercentage = document.getElementById("final-percentage");
+    const resultsHeadline = document.getElementById("results-headline");
+    const resultsMessage = document.getElementById("results-message");
+    const reviewSection = document.getElementById("review-section");
+    const reviewList = document.getElementById("review-list");
+
+    // Initialize Event Listeners
+    startBtn.addEventListener("click", startQuiz);
+    checkBtn.addEventListener("click", checkAnswer);
+    nextBtn.addEventListener("click", handleNextQuestion);
+    tryAgainBtn.addEventListener("click", resetQuiz);
+    toggleReviewBtn.addEventListener("click", toggleReview);
+
+    /**
+     * Start the quiz
+     */
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      userAnswers = [];
+      homeView.classList.add("hidden");
+      resultsView.classList.add("hidden");
+      quizView.classList.remove("hidden");
+      renderQuestion();
+    }
+
+    /**
+     * Render current question
+     */
+    function renderQuestion() {
+      const q = quizData[currentQuestionIndex];
+      selectedOptionIndex = null;
+
+      // Meta & progress
+      questionTracker.textContent = `Question ${currentQuestionIndex + 1} of ${quizData.length}`;
+      difficultyBadge.textContent = q.difficulty;
+      difficultyBadge.className = `difficulty-tag ${q.difficulty.toLowerCase()}`;
+
+      const progressPercent = ((currentQuestionIndex) / quizData.length) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // Illustration
+      illustrationIcon.textContent = q.icon;
+      illustrationTitle.textContent = q.iconTitle;
+      illustrationDesc.textContent = q.iconDesc;
+
+      // Prompt
+      questionText.textContent = q.question;
+
+      // Reset feedback box and check button
+      feedbackBox.classList.add("hidden");
+      feedbackBox.className = "feedback-box hidden";
+      checkBtn.disabled = true;
+      checkBtn.classList.remove("hidden");
+
+      // Render options
+      optionsGrid.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerHTML = `
+          <span class="option-badge">${letters[idx]}</span>
+          <span style="flex: 1;">${opt}</span>
+        `;
+        btn.addEventListener("click", () => selectOption(idx));
+        optionsGrid.appendChild(btn);
+      });
+    }
+
+    /**
+     * Option selection
+     */
+    function selectOption(index) {
+      selectedOptionIndex = index;
+      const optionButtons = optionsGrid.querySelectorAll(".option-btn");
+      optionButtons.forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add("selected");
+        } else {
+          btn.classList.remove("selected");
+        }
+      });
+      // Enable check button once an option is selected
+      checkBtn.disabled = false;
+    }
+
+    /**
+     * Check Answer & display immediate feedback
+     */
+    function checkAnswer() {
+      if (selectedOptionIndex === null) return;
+
+      const q = quizData[currentQuestionIndex];
+      const isCorrect = selectedOptionIndex === q.correctIndex;
+      const optionButtons = optionsGrid.querySelectorAll(".option-btn");
+
+      // Lock buttons - prevent further selection changes
+      optionButtons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.correctIndex) {
+          btn.classList.add("is-correct");
+        }
+        if (idx === selectedOptionIndex && !isCorrect) {
+          btn.classList.add("is-incorrect");
+        }
+      });
+
+      // Update score & log answer
+      if (isCorrect) {
+        score++;
+      }
+      userAnswers.push({
+        questionId: q.id,
+        selectedIndex: selectedOptionIndex,
+        isCorrect: isCorrect
+      });
+
+      // Hide check button after checking
+      checkBtn.classList.add("hidden");
+
+      // Show Feedback Card
+      feedbackBox.classList.remove("hidden");
+      if (isCorrect) {
+        feedbackBox.classList.add("correct");
+        feedbackTitle.innerHTML = `
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          Correct!
+        `;
+      } else {
+        feedbackBox.classList.add("incorrect");
+        feedbackTitle.innerHTML = `
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Incorrect!
+        `;
+      }
+
+      feedbackExplanation.innerHTML = `
+        <div style="margin-bottom: 6px;"><strong>Correct Answer:</strong> ${q.options[q.correctIndex]}</div>
+        <div>${q.explanation}</div>
+      `;
+
+      // Change button text if last question
+      if (currentQuestionIndex === quizData.length - 1) {
+        nextBtn.innerHTML = `
+          View Results
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        `;
+      } else {
+        nextBtn.innerHTML = `
+          Next Question
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        `;
+      }
+    }
+
+    /**
+     * Advance to the next question or results
+     */
+    function handleNextQuestion() {
+      if (currentQuestionIndex < quizData.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    /**
+     * Show Results View
+     */
+    function showResults() {
+      quizView.classList.add("hidden");
+      resultsView.classList.remove("hidden");
+      progressBar.style.width = "100%";
+
+      finalScore.textContent = `${score}/${quizData.length}`;
+      const percentage = Math.round((score / quizData.length) * 100);
+      finalPercentage.textContent = `${percentage}%`;
+
+      // Dynamic feedback based on score
+      if (score === 10) {
+        resultsHeadline.textContent = "Perfect Score! 🌟";
+        resultsMessage.textContent = "Brilliant! You solved every single probability problem correctly. You have true mastery over the subject.";
+      } else if (score >= 8) {
+        resultsHeadline.textContent = "Great Job! 🎯";
+        resultsMessage.textContent = "Very strong performance! You have a solid grasp of independent events, sample spaces, and probability rules.";
+      } else if (score >= 5) {
+        resultsHeadline.textContent = "Good Effort! 📚";
+        resultsMessage.textContent = "You understand the basics well! Review the questions you missed below to master conditional and multi-step probability.";
+      } else {
+        resultsHeadline.textContent = "Keep Practicing! 💡";
+        resultsMessage.textContent = "Probability can be tricky and counter-intuitive. Use the answer review below to study the step-by-step solutions and try again.";
+      }
+
+      renderReview();
+    }
+
+    /**
+     * Build the detailed review list
+     */
+    function renderReview() {
+      reviewList.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+
+      quizData.forEach((q, idx) => {
+        const record = userAnswers[idx];
+        const isCorrect = record ? record.isCorrect : false;
+        const userChoice = record ? q.options[record.selectedIndex] : "None";
+        const userChoiceLetter = record ? letters[record.selectedIndex] : "-";
+        const correctChoice = q.options[q.correctIndex];
+        const correctChoiceLetter = letters[q.correctIndex];
+
+        const item = document.createElement("div");
+        item.className = `review-item ${isCorrect ? "was-correct" : "was-incorrect"}`;
+        item.innerHTML = `
+          <div class="review-q-title">${idx + 1}. ${q.question}</div>
+          <div class="review-answer-row">
+            <strong>Your Choice:</strong> 
+            <span class="${isCorrect ? "correct-txt" : "incorrect-txt"}">
+              ${userChoiceLetter}) ${userChoice} ${isCorrect ? "✓" : "✗"}
+            </span>
+          </div>
+          ${!isCorrect ? `
+          <div class="review-answer-row">
+            <strong>Correct Choice:</strong> 
+            <span class="correct-txt">${correctChoiceLetter}) ${correctChoice}</span>
+          </div>` : ""}
+          <div class="review-expl">
+            <strong>Explanation:</strong> ${q.explanation}
+          </div>
+        `;
+        reviewList.appendChild(item);
+      });
+    }
+
+    /**
+     * Toggle the review answers view
+     */
+    function toggleReview() {
+      const isHidden = reviewSection.classList.contains("hidden");
+      if (isHidden) {
+        reviewSection.classList.remove("hidden");
+        toggleReviewBtn.textContent = "Hide Review";
+        reviewSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        reviewSection.classList.add("hidden");
+        toggleReviewBtn.textContent = "Review Answers";
+      }
+    }
+
+    /**
+     * Reset Quiz
+     */
+    function resetQuiz() {
+      reviewSection.classList.add("hidden");
+      toggleReviewBtn.textContent = "Review Answers";
+      startQuiz();
+    }
+  </script>
+</body>
+</html>
